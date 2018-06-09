@@ -8,7 +8,7 @@ let todosDiv = document.querySelector('.todosDiv');
 //         todosDiv.innerHTML = "Wpisz liczbę!";}
 // }
 // btn.addEventListener('click',licz);
-let todolist = {
+const todolist = {
     todos : [],
     displayTodos(){ 
         if(this.todos.length === 0){
@@ -73,29 +73,60 @@ todolist.addTodo('kociak');
 todolist.addTodo('doopka');
 todolist.addTodo('misiek');
 todolist.toggleComplete(2);
-//todolist.toggleComplete(1);
 //todolist.toggleAll();
-
-// btn.addEventListener('click',function(){
-//     todolist.displayTodos();
-// })
-// toggle.addEventListener('click',function(){
-//     todolist.toggleAll();
-// })
 
 let handlers = { //zamiast kodu powyzej z addEventLi..wrzucenie do obiektu
     displayTodos: function(){
         todolist.displayTodos();
     },
-    toggleAll: function(){
-        todolist.toggleAll();
-    },
     addTodo: function(){
         let input = document.querySelector('input');
         todolist.addTodo(input.value);
         input.value = "";
+    },
+    changeTodo: function(){
+        let changeTodoPositionInput = document.getElementById('changeTodoPositionInput');
+        let changeTodoTextInput = document.getElementById('changeTodoTextInput');
+        todolist.changeTodo(changeTodoPositionInput.valueAsNumber, changeTodoTextInput.value);
+        changeTodoPositionInput.value ="";
+        changeTodoTextInput.value = "";
+    },
+    deleteTodo: function(){
+        let deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+        todolist.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+        deleteTodoPositionInput.value ="";
+    },
+    toggleComplete: function(){
+        let toggleCompleteInput = document.getElementById('toggleCompleteInput');
+        todolist.toggleComplete(toggleCompleteInput.valueAsNumber);
+        toggleCompleteInput.value ="";
+    },
+    toggleAll: function(){
+        todolist.toggleAll();
     }
 }
+
+const view = { //object that is responsible of what user see
+    displayTodos: function(){
+        let todosUl = document.querySelector('ul');
+        todosUl.innerHTML = '';        
+        for (let i = 0; i <todolist.todos.length; i++){
+            let todoLi = document.createElement('li');
+            let todo = todoList.todos[i]; //tablica
+
+            let todoTextWithCompletion = "";
+            if(todo.completed === true){
+                todoTextWithCompletion = '(x)' + todo.todoText;
+            } else {
+                todoTextWithCompletion = '( )' + todo.todoText;
+            }
+            
+            todoLi.textContent = todoTextWithCompletion;
+            todosUl.appendChild(todoLi);
+        }
+    }
+}
+view.displayTodos();
 
 
 

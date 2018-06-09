@@ -20,7 +20,21 @@
         <button onclick="handlers.addTodo()">Add</button>
         <input type="text" />
     </div>
+    <div>
+        <button onclick="handlers.changeTodo()">Change</button>
+        <input id="changeTodoPositionInput" type="number" /><input id="changeTodoTextInput" type="text" />
+    </div>
+    <div>
+        <button onclick="handlers.deleteTodo()">Delete</button>
+        <input id="deleteTodoPositionInput" type="number">
+    </div>
+    <div>
+        <button onclick="handlers.toggleComplete()">Toggle Completed</button>
+        <input id="toggleCompleteInput" type="number">
+    </div>
+
     <div class="todosDiv"></div>
+    <ul></ul>
 
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
